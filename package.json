@@ -1,0 +1,58 @@
+{
+  "name": "fast-nest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec \"ts-node\" main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mykurisu/fast-nest.git"
+  },
+  "keywords": [
+    "nest.js"
+  ],
+  "author": "mykurisu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mykurisu/fast-nest/issues"
+  },
+  "homepage": "https://github.com/mykurisu/fast-nest#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "cz-conventional-changelog": "^3.0.2",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.10.1",
+    "@nestjs/core": "^6.10.1",
+    "@nestjs/platform-express": "^6.10.1",
+    "@types/cookie-parser": "^1.4.2",
+    "cookie-parser": "^1.4.4",
+    "moment": "^2.24.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.5.3"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "modules/",
+      "common/",
+      "app.module.ts",
+      "main.ts"
+    ],
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "ext": "ts"
+  }
+}

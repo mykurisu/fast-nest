@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "lib": ["es2017", "dom"],
+        "sourceMap": true,
+        "outDir": "build",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "strict": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "typeRoots": [
+            "./node_modules/@types",
+        ],
+        "paths": {
+            "*": [
+                "typings/*"
+            ]
+        },
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "main.ts",
+        "app.module.ts",
+        "typings/**/*"
+    ]
+}

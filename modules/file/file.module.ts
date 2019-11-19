@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common'
+import { FileController } from './file.controller'
 
 @Module({
-    controllers: [],
+    controllers: [ FileController ],
     providers: []
 })
 export class FileModule {}

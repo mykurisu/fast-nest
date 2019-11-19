@@ -27,6 +27,7 @@
     "include": [
         "main.ts",
         "app.module.ts",
-        "typings/**/*"
+        "typings/**/*",
+        "modules/**/*"
     ]
 }

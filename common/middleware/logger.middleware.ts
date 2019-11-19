@@ -2,6 +2,7 @@ import { Injectable, NestMiddleware, Req, Res } from '@nestjs/common'
 import { Request, Response } from 'express'
 import moment from 'moment'
 import chalk from 'chalk'
+import bytes from 'bytes'
 
 
 @Injectable()
@@ -14,15 +15,23 @@ export class LoggerMiddleware implements NestMiddleware<any, any> {
         try {
             await next()
         } catch (error) {
-            console.log(`[${req.method}] ${moment().format()} <-- ${chalk.red(String(res.statusCode))} ${chalk.bold(url)} error: ${error}`)            
+            console.log(`[${req.method}] ${moment().format()} <-- ${chalk.red(String(res.statusCode))} ${chalk.bold(url)} error: ${error}`)
             throw error
         }
-        
+
         const onFinish = () => {
             const finishTime: number = Date.now()
-            console.log(`[${req.method}] ${moment(finishTime).format()} <-- ${chalk.green(String(res.statusCode))} ${chalk.bold(url)} ${chalk.bold((finishTime - startTime) + 'ms')}`)
+            const { statusCode } = res
+            let length: string
+            if (~[204, 205, 304].indexOf(statusCode)) {
+                length = ''
+            } else {
+                const l = Number(res.getHeader('content-length'))
+                length = bytes(l).toLowerCase()
+            }
+            console.log(`[${req.method}] ${moment(finishTime).format()} <-- ${chalk.green(String(statusCode))} ${chalk.bold(url)} ${chalk.bold((finishTime - startTime) + 'ms')} ${length}`)
         }
-        
+
         res.once('finish', () => {
             onFinish()
             res.removeListener('finish', onFinish)

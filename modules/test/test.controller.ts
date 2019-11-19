@@ -1,13 +1,25 @@
-import { Controller, Post } from '@nestjs/common'
+import { Controller, Post, Get } from '@nestjs/common'
+import { TencentCosService } from '../_share/TencentCosService.service'
 
 
 @Controller('/test')
 export class TestController {
 
-    @Post()
+    constructor(private readonly tencentCosService: TencentCosService) {}
+
+    @Get()
     async getList() {
         return Promise.resolve({
             items: [
+                {
+                    name: 1,
+                },
+                {
+                    name: 1,
+                },
+                {
+                    name: 1,
+                },
                 {
                     name: 1,
                 },
@@ -16,6 +28,13 @@ export class TestController {
                 }
             ],
         })
+    }
+
+    @Post('/cos')
+    async getCos() {
+        const cos = this.tencentCosService.getCosInstance()
+        console.log(cos)
+        return {}
     }
     
 }

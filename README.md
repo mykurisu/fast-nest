@@ -1,1 +1,3 @@
-##   Fast-Nest project: Help You Initialize Your Nest Project.
+##   Fast-Nest project
+
+### Help You Initialize Your Nest Project.

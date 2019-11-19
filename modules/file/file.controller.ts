@@ -1,13 +1,20 @@
-import { Controller, Post } from '@nestjs/common'
+import { Controller, Post, UseInterceptors, UploadedFile } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 
 
 @Controller('/file')
-export class FileController {
+@UseInterceptors(FileInterceptor('file'))
+class FileController {
 
-    @Post('/upload')
-    async upload() {
-        return Promise.resolve()
+    @Post('/uploadImage')
+    async uploadImg(@UploadedFile() file: any) {
+        if (!file) {
+            return Promise.reject('文件不能为空')
+        }
+        const path = ''
+        return Promise.resolve({ path })
     }
     
 }
 
+export default FileController

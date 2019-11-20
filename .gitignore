@@ -1,6 +1,8 @@
 # dependencies
 node_modules/
 
+/uploads/**/*
+!/uploads/.gitkeep
 .vscode/
 .idea/
 config.ts

@@ -1,3 +1,3 @@
-##   Fast-Nest project
+##   Fast-Nest
 
-### Help You Initialize Your Nest Project.
+### 帮助您快速初始化基于Nest.js的node后端服务。

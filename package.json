@@ -1,8 +1,8 @@
 {
   "name": "fast-nest",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Help You Initialize Your Nest Project",
+  "main": "main.js",
   "scripts": {
     "start": "nodemon --exec \"ts-node\" main.ts"
   },
@@ -11,7 +11,9 @@
     "url": "git+https://github.com/mykurisu/fast-nest.git"
   },
   "keywords": [
-    "nest.js"
+    "nest.js",
+    "nodejs",
+    "typescript"
   ],
   "author": "mykurisu",
   "license": "ISC",

@@ -5,4 +5,4 @@ node_modules/
 !/uploads/.gitkeep
 .vscode/
 .idea/
-config.ts
+config.ts.*

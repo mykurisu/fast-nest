@@ -1,4 +1,7 @@
-export default {
+import { IConfig } from './common/interface'
+
+
+const config: IConfig =  {
     cos: {
         SecretId: '',
         SecretKey: '',
@@ -7,8 +10,10 @@ export default {
         path: 'https://xxx.cos.ap-guangzhou.myqcloud.com'
     },
     mongo: {
-        url: '',
-        poolSize: '',
+        url: 'mongodb://localhost:27017',
+        poolSize: 30
     },
     url: "http://localhost:9999"
 }
+
+export default config

@@ -9,15 +9,22 @@ export class FileController {
 
     constructor(private readonly fileService: FileService) {}
 
-    @Post('/uploadImage')
-    async uploadImg(@UploadedFiles() files: Array<any>) {
-        console.log(files)
+    @Post('/upload2Local')
+    async upload2Local(@UploadedFiles() files: Array<any>) {
         if (!files || files.length <= 0) {
             return Promise.reject('文件不能为空')
         }
-        await this.fileService.handleUpload2Local(files)
-        const path = ''
-        return Promise.resolve({ path })
+        const fileList = await this.fileService.handleUpload2Local(files)
+        return Promise.resolve({ fileList })
+    }
+
+    @Post('/upload2Cos')
+    async upload2Cos(@UploadedFiles() files: Array<any>) {
+        if (!files || files.length <= 0) {
+            return Promise.reject('文件不能为空')
+        }
+        const fileList = await this.fileService.handleUpload2Cos(files)
+        return Promise.resolve({ fileList })
     }
     
 }

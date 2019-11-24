@@ -6,7 +6,7 @@ export class TencentCosService {
     private cosCache: any;
     private cdnCache: any;
 
-    getCosInstance() {
+    getCosInstance(): any {
         if (this.cosCache) {
             return this.cosCache
         }
@@ -20,7 +20,7 @@ export class TencentCosService {
         return instance
     }
 
-    getCdnInstance() {
+    getCdnInstance(): any {
         if (this.cdnCache) {
             return this.cdnCache
         }

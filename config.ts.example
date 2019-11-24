@@ -1,0 +1,14 @@
+export default {
+    cos: {
+        SecretId: '',
+        SecretKey: '',
+        Bucket: 'xxx-123456',
+        Region: 'ap-guangzhou',
+        path: 'https://xxx.cos.ap-guangzhou.myqcloud.com'
+    },
+    mongo: {
+        url: '',
+        poolSize: '',
+    },
+    url: "http://localhost:9999"
+}

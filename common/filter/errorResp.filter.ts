@@ -15,20 +15,19 @@ export class ErrorFilter implements ExceptionFilter {
         const request = ctx.getRequest();
 
         const message = exception.message.message;
-        Logger.log('错误提示', message);
+        Logger.log('ERROR: ', message);
         const errorResponse = {
             data: {
                 error: message,
-            }, // 获取全部的错误信息
-            message: '请求失败',
-            code: 1, // 自定义code
-            url: request.originalUrl, // 错误的url地址
+            },
+            message: 'fail',
+            code: 1,
+            url: request.originalUrl,
         };
         const status =
             exception instanceof HttpException
                 ? exception.getStatus()
                 : HttpStatus.INTERNAL_SERVER_ERROR;
-        // 设置返回的状态码、请求头、发送错误信息
         response.status(status);
         response.header('Content-Type', 'application/json; charset=utf-8');
         response.send(errorResponse);

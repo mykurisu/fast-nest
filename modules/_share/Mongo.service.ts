@@ -15,7 +15,7 @@ export class MongoService implements OnModuleInit {
             useUnifiedTopology: true
         }, (err, client) => {
             if (err) {
-                throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR)
+                return console.log(err)
             }
             this.connection = client
             console.log('MongoDB INITED')

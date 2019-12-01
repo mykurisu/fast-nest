@@ -12,7 +12,8 @@ export interface IConfig {
         url: string,
         poolSize: number,
     },
-    url: string
+    url: string,
+    cryptoStr: string,
 }
 
 export interface ISession {
@@ -22,4 +23,12 @@ export interface ISession {
 
 export interface IRequest extends Request {
     uSession: ISession 
+}
+
+export interface IUser {
+    id: string,
+    password: string,
+    uid: string,
+    email: string,
+    phone: string
 }

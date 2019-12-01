@@ -13,7 +13,8 @@ const config: IConfig =  {
         url: 'mongodb://localhost:27017',
         poolSize: 30
     },
-    url: "http://localhost:9999"
+    url: 'http://localhost:9999',
+    cryptoStr: 'nest'
 }
 
 export default config

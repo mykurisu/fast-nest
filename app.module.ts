@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common'
 import { CoreModule } from './modules/core.module'
-import { ShareModule } from './modules/share.module'
+import { CommonModule } from './modules/common.module'
 import { FeatureModule } from './modules/feature.module'
 
 @Module({
     imports: [
         CoreModule,
         FeatureModule,
-        ShareModule,
+        CommonModule,
     ]
 })
 export default class ApplicationModule {}

@@ -4,7 +4,7 @@ import md5 from 'blueimp-md5'
 import Config from '../../config'
 
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
-import { TencentCosService } from '../_share/TencentCos.service'
+import { TencentCosService } from '../_common/TencentCos.service'
 
 
 interface IFileResult {

@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
-import { MongoService } from '../_share/Mongo.service'
+import { MongoService } from '../_common/Mongo.service'
 
 
 @Injectable()

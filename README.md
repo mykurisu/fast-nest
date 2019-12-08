@@ -30,7 +30,7 @@ npm start
 
 项目启动后，如果你没有启动本地的MongoDB会出现超时的报错，这时有两种方案：
 
-①   将**share.module**中的mongo公共服务挂载删除
+①   将**common.module**中的mongo公共服务挂载删除
 
 ②   本地启动MongoDB，连接数据库的配置亦在**config.ts**内
 

@@ -1,7 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
-import { MongoService } from '../_share/Mongo.service'
-import { CryptoService } from '../_share/crypto.service'
+import { MongoService } from '../_common/Mongo.service'
+import { CryptoService } from '../_common/crypto.service'
 import { IUser } from '../../common/interface/index'
+import { randomString } from '../../common/utils/index'
 
 
 @Injectable()
@@ -32,11 +33,13 @@ export class UserService {
                 email: type === 'email' ? id : '',
                 phone: type === 'phone' ? id : '',
                 password: this.cryptoService.aesEncrypt(password),
-                uid: this.cryptoService.hash(id)
+                uid: randomString(8)
             }
             await col.insertOne(userInfo)
-            delete userInfo.password
-            return userInfo
+
+            const { uid } = userInfo
+            const token = await this.createToken(uid)
+            return token
         } catch (e) {
             return Promise.reject(e)
         }
@@ -64,13 +67,18 @@ export class UserService {
                     mesage: 'user or password error'
                 })
             }
+
+            const { uid } = user
+            const token = await this.createToken(uid)
+            return token
         } catch (e) {
             return Promise.reject(e)
         }
     }
 
-    async getUserInfo(uid: string) {
+    async getUserInfo(token: string) {
         try {
+            const [uid] = this.cryptoService.aesDecrypt(token).split('_')
             const col = await this.mongoService.getCol('fast-nest', 'user')
             if (!col) {
                 throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
@@ -80,6 +88,20 @@ export class UserService {
         } catch (e) {
             return Promise.reject(e)
         }
+    }
+
+    private async createToken(uid: string) {
+        const userToken = this.cryptoService.aesEncrypt(`${uid}_${randomString(4)}`)
+        const tokenCol = await this.mongoService.getCol('fast-nest', 'user_token')
+        await tokenCol.updateOne({ uid }, {
+            $set: {
+                uid,
+                userToken
+            }
+        }, {
+            upsert: true
+        })
+        return userToken
     }
     
 }

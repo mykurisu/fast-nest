@@ -20,8 +20,8 @@ export class UserController {
     }
 
     @Post('/getUserInfo')
-    async getUserInfo(@Body('uid') uid: string) {
-        const res = this.userService.getUserInfo(uid)
+    async getUserInfo(@Body('token') token: string) {
+        const res = this.userService.getUserInfo(token)
         return Promise.resolve(res)
     }
     

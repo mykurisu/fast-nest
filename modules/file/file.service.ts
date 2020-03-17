@@ -5,15 +5,8 @@ import Config from '../../config'
 
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
 import { TencentCosService } from '../_common/TencentCos.service'
+import { IFileResult } from '../../common/interface/index'
 
-
-interface IFileResult {
-    name: string,
-    fileName?: string,
-    serverPath?: string,
-    path: string,
-    size?: number
-}
 
 @Injectable()
 export class FileService {

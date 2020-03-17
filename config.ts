@@ -2,6 +2,9 @@ import { IConfig } from './common/interface'
 
 
 const config: IConfig =  {
+    serverConfig: {
+        port: 6666
+    },
     cos: {
         SecretId: '',
         SecretKey: '',

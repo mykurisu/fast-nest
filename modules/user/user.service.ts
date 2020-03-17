@@ -38,8 +38,9 @@ export class UserService {
             await col.insertOne(userInfo)
 
             const { uid } = userInfo
-            const token = await this.createToken(uid)
-            return token
+            userInfo.token = await this.createToken(uid)
+            
+            return { ...userInfo }
         } catch (e) {
             return Promise.reject(e)
         }
@@ -60,7 +61,7 @@ export class UserService {
             } else {
                 q.id = id
             }
-            const user = await col.findOne(q)
+            const user: IUser | null = await col.findOne(q)
             if (!user) {
                 return Promise.resolve({
                     status: -1000,
@@ -69,8 +70,8 @@ export class UserService {
             }
 
             const { uid } = user
-            const token = await this.createToken(uid)
-            return token
+            user.token = await this.createToken(uid)
+            return { ...user }
         } catch (e) {
             return Promise.reject(e)
         }

@@ -1,6 +1,9 @@
 import { Request } from 'express'
 
 export interface IConfig {
+    serverConfig: {
+        port: number
+    }
     cos: {
         SecretId: string,
         SecretKey: string,
@@ -30,5 +33,14 @@ export interface IUser {
     password: string,
     uid: string,
     email: string,
-    phone: string
+    phone: string,
+    token?: string
+}
+
+export interface IFileResult {
+    name: string,
+    fileName?: string,
+    serverPath?: string,
+    path: string,
+    size?: number
 }

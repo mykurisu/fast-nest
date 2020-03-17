@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient, MongoError } from 'mongodb'
 import { Injectable, OnModuleInit, HttpException, HttpStatus } from '@nestjs/common'
 import Config from '../../config'
 
@@ -13,8 +13,9 @@ export class MongoService implements OnModuleInit {
             poolSize,
             useNewUrlParser: true,
             useUnifiedTopology: true
-        }, (err, client) => {
+        }, (err: MongoError, client: MongoClient | null) => {
             if (err) {
+                console.log('MongoDB INIT FAIL')
                 return console.log(err)
             }
             this.connection = client

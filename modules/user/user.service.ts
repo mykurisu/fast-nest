@@ -15,7 +15,7 @@ export class UserService {
 
     async createUser(id: string, password: string, type?: string) {
         try {
-            const col = await this.mongoService.getCol('fast-nest', 'user')
+            const col = await this.mongoService.getCol('user')
             if (!col) {
                 throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
             }
@@ -48,7 +48,7 @@ export class UserService {
 
     async userLogin(id: string, password: string, type?: string) {
         try {
-            const col = await this.mongoService.getCol('fast-nest', 'user')
+            const col = await this.mongoService.getCol('user')
             if (!col) {
                 throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
             }
@@ -80,7 +80,7 @@ export class UserService {
     async getUserInfo(token: string) {
         try {
             const [uid] = this.cryptoService.aesDecrypt(token).split('_')
-            const col = await this.mongoService.getCol('fast-nest', 'user')
+            const col = await this.mongoService.getCol('user')
             if (!col) {
                 throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
             }
@@ -93,7 +93,7 @@ export class UserService {
 
     private async createToken(uid: string) {
         const userToken = this.cryptoService.aesEncrypt(`${uid}_${randomString(4)}`)
-        const tokenCol = await this.mongoService.getCol('fast-nest', 'user_token')
+        const tokenCol = await this.mongoService.getCol('user_token')
         await tokenCol.updateOne({ uid }, {
             $set: {
                 uid,

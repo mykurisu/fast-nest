@@ -3,7 +3,7 @@ import { Injectable, OnModuleInit, HttpException, HttpStatus } from '@nestjs/com
 import Config from '../../config'
 
 
-const { url, poolSize } = Config.mongo
+const { url, poolSize, appDbName } = Config.mongo
 @Injectable()
 export class MongoService implements OnModuleInit {
     public connection: MongoClient | null = null
@@ -30,9 +30,12 @@ export class MongoService implements OnModuleInit {
         return this.connection.db(db)
     }
 
-    async getCol(db: string, collection: string) {
+    async getCol(collection: string, db?: string) {
         if (!this.connection) {
             throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        if (!db) {
+            db = appDbName
         }
         const database = this.connection.db(db)
         if (!database) {

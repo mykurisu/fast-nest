@@ -14,6 +14,7 @@ export interface IConfig {
     mongo: {
         url: string,
         poolSize: number,
+        appDbName: string,
     },
     url: string,
     cryptoStr: string,

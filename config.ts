@@ -14,7 +14,8 @@ const config: IConfig =  {
     },
     mongo: {
         url: 'mongodb://localhost:27017',
-        poolSize: 30
+        poolSize: 30,
+        appDbName: 'fase-nest'
     },
     url: 'http://localhost:9999',
     cryptoStr: 'nest'

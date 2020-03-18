@@ -27,7 +27,7 @@ export class LoggerMiddleware implements NestMiddleware<any, any> {
                 length = ''
             } else {
                 const l = Number(res.getHeader('content-length'))
-                length = bytes(l).toLowerCase()
+                length = bytes(l) ? bytes(l).toLowerCase() : ''
             }
             console.log(`[${req.method}] ${moment(finishTime).format()} <-- ${chalk.green(String(statusCode))} ${chalk.bold(url)} ${chalk.bold((finishTime - startTime) + 'ms')} ${length}`)
         }

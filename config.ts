@@ -17,7 +17,7 @@ const config: IConfig =  {
         poolSize: 30,
         appDbName: 'fase-nest'
     },
-    url: 'http://localhost:9999',
+    url: 'http://localhost:6666',
     cryptoStr: 'nest'
 }
 

@@ -1,0 +1,6 @@
+{
+    "apps": [{
+        "name": "fast-nest",
+        "script": "./build/main.js"
+    }]
+}

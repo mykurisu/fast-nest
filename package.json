@@ -2,9 +2,11 @@
   "name": "fast-nest",
   "version": "1.1.0",
   "description": "Help You Initialize Your Nest Project",
-  "main": "main.js",
+  "main": "main.ts",
   "scripts": {
     "start": "nodemon --exec \"ts-node\" main.ts",
+    "build": "tsc -p tsconfig.json",
+    "deploy": "tsc -p tsconfig.json && cross-env NODE_ENV=production pm2 start pm2.json",
     "release": "standard-version"
   },
   "repository": {
@@ -49,6 +51,7 @@
     "bytes": "^3.1.0",
     "cookie-parser": "^1.4.4",
     "cos-nodejs-sdk-v5": "^2.5.14",
+    "cross-env": "^7.0.2",
     "crypto": "^1.0.1",
     "moment": "^2.24.0",
     "mongodb": "^3.3.4",

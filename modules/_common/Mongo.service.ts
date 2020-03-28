@@ -8,19 +8,8 @@ const { url, poolSize, appDbName } = Config.mongo
 export class MongoService implements OnModuleInit {
     public connection: MongoClient | null = null
 
-    onModuleInit() {
-        MongoClient.connect(url, {
-            poolSize,
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }, (err: MongoError, client: MongoClient | null) => {
-            if (err) {
-                console.log('MongoDB INIT FAIL')
-                return console.log(err)
-            }
-            this.connection = client
-            console.log('MongoDB INITED')
-        })
+    async onModuleInit() {
+        await this.DBInit()
     }
 
     async getDB(db: string) {
@@ -42,6 +31,24 @@ export class MongoService implements OnModuleInit {
             throw new HttpException('DB ERROR', HttpStatus.INTERNAL_SERVER_ERROR)
         }
         return database.collection(collection)
+    }
+
+    private DBInit() {
+        return new Promise((resolve, reject) => {
+            MongoClient.connect(url, {
+                poolSize,
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            }, (err: MongoError, client: MongoClient | null) => {
+                if (err) {
+                    console.log('MongoDB INIT FAIL')
+                    reject(err)
+                }
+                this.connection = client
+                console.log('MongoDB INITED')
+                resolve()
+            })
+        })
     }
 
 }

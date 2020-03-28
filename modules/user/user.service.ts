@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common'
+import { Injectable, HttpException, HttpStatus, OnModuleInit } from '@nestjs/common'
 import { MongoService } from '../_common/Mongo.service'
 import { CryptoService } from '../_common/crypto.service'
 import { IUser } from '../../common/interface/index'
@@ -6,12 +6,32 @@ import { randomString } from '../../common/utils/index'
 
 
 @Injectable()
-export class UserService {
+export class UserService implements OnModuleInit {
 
     constructor(
         private readonly mongoService: MongoService,
         private readonly cryptoService: CryptoService
     ) {}
+
+    async onModuleInit() {
+        const col = await this.mongoService.getCol('user')
+        const stats = await col.stats()
+        let needCreateIndex = false
+        if (stats.totalIndexSize < 1) {
+            needCreateIndex = true
+        } else {
+            const hasUniq = await col.indexExists("username_1")
+            if (!hasUniq) {
+                needCreateIndex = true
+            }
+        }
+
+        if (needCreateIndex) {
+            console.log('user collection createIndex username')
+            await col.createIndex({ "username": 1 }, { unique: true })
+        }
+    }
+
 
     async createUser(id: string, password: string, type?: string) {
         try {

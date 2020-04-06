@@ -1,4 +1,4 @@
-import crypto from 'crypto'
+import crypto from 'crypto-js'
 import { Injectable } from '@nestjs/common'
 import Config from '../../config'
 
@@ -6,22 +6,16 @@ import Config from '../../config'
 @Injectable()
 export class CryptoService {
     aesEncrypt(content: string) {
-        const cipher = crypto.createCipher('aes192', Config.cryptoStr)
-        let crypted = cipher.update(content, 'utf8', 'hex')
-        crypted += cipher.final('hex')
-        return crypted
+        return crypto.AES.encrypt(content, Config.cryptoStr).toString()
     }
 
     aesDecrypt(encryptedContent: string) {
-        const decipher = crypto.createDecipher('aes192', Config.cryptoStr);
-        let decrypted = decipher.update(encryptedContent, 'hex', 'utf8')
-        decrypted += decipher.final('utf8')
-        return decrypted
+        const bytes = crypto.AES.decrypt(encryptedContent, Config.cryptoStr);
+        return bytes.toString(crypto.enc.Utf8);
     }
 
     hash(content: string) {
-        const hash = crypto.createHash('md5')
-        hash.update(content)
-        return hash.digest('hex')
+        const hash = crypto.HmacSHA1(content)
+        return hash
     }
 }

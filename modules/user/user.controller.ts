@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common'
+import { Controller, Post, Body, Get, Query, Redirect } from '@nestjs/common'
 import { UserService } from './user.service'
 
 
@@ -6,6 +6,12 @@ import { UserService } from './user.service'
 export class UserController {
 
     constructor(private readonly userService: UserService) {}
+
+    @Get('/validAuthUrl')
+    async validAuthUrl(@Query('authUrl') authUrl: string) {
+        await this.userService.validAuthUrl(authUrl)
+        return Promise.resolve()
+    }
 
     @Post('/create')
     async createUser(@Body('id') id: string, @Body('password') password: string, @Body('type') type?: string) {
@@ -23,6 +29,11 @@ export class UserController {
     async getUserInfo(@Body('token') token: string) {
         const res = this.userService.getUserInfo(token)
         return Promise.resolve(res)
+    }
+
+    @Post('/sendAuthUrl')
+    async sendCode(@Body('mail') mail: string) {
+        await this.userService.sendCode(mail)
     }
     
 }

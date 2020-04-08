@@ -3,7 +3,8 @@ import { IConfig } from './common/interface'
 
 const config: IConfig =  {
     serverConfig: {
-        port: 6666
+        port: 6666,
+        selfUrl: 'http://localhost:6666'
     },
     cos: {
         SecretId: '',
@@ -17,8 +18,7 @@ const config: IConfig =  {
         poolSize: 30,
         appDbName: 'fast-nest'
     },
-    url: 'http://localhost:6666',
-    cryptoStr: 'nest'
+    cryptoStr: 'nest',
 }
 
 export default config

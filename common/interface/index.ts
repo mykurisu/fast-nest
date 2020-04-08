@@ -2,7 +2,8 @@ import { Request } from 'express'
 
 export interface IConfig {
     serverConfig: {
-        port: number
+        port: number,
+        selfUrl: string
     }
     cos: {
         SecretId: string,
@@ -16,8 +17,19 @@ export interface IConfig {
         poolSize: number,
         appDbName: string,
     },
-    url: string,
     cryptoStr: string,
+    emailSettings?: IEmailConfig
+}
+
+export interface IEmailConfig {
+    emailCode: string,
+    host: string,
+    port: number,
+    secure: boolean,
+    auth: {
+        user: string,
+        pass: string
+    }
 }
 
 export interface ISession {

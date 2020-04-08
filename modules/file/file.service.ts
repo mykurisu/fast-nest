@@ -30,7 +30,7 @@ export class FileService {
                             name: file.originalname,
                             fileName,
                             serverPath: filePath,
-                            path: `${Config.url}/static/${fileName}`,
+                            path: `${Config.serverConfig.selfUrl}/static/${fileName}`,
                             size: file.size
                         })
                         resolve()

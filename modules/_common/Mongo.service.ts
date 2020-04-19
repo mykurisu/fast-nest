@@ -1,5 +1,5 @@
 import { MongoClient, MongoError } from 'mongodb'
-import { Injectable, OnModuleInit, HttpException, HttpStatus } from '@nestjs/common'
+import { Injectable, OnModuleInit, HttpException, HttpStatus, Logger } from '@nestjs/common'
 import Config from '../../config'
 
 
@@ -41,11 +41,11 @@ export class MongoService implements OnModuleInit {
                 useUnifiedTopology: true
             }, (err: MongoError, client: MongoClient | null) => {
                 if (err) {
-                    console.log('MongoDB INIT FAIL')
-                    reject(err)
+                    Logger.error('MongoDB INIT FAIL', undefined, 'FastNest')
+                    return reject(err)
                 }
                 this.connection = client
-                console.log('MongoDB INITED')
+                Logger.log('MongoDB INITED', 'FastNest')
                 resolve()
             })
         })

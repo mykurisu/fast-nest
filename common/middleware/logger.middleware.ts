@@ -1,8 +1,7 @@
 import { Injectable, NestMiddleware, Req, Res } from '@nestjs/common'
 import { Request, Response } from 'express'
-import moment from 'moment'
-import chalk from 'chalk'
 import bytes from 'bytes'
+import { logger } from '../../modules/_common/Logger.service'
 
 
 @Injectable()
@@ -10,12 +9,12 @@ export class LoggerMiddleware implements NestMiddleware<any, any> {
     async use(@Req() req: Request, @Res() res: Response, next: Function) {
         const startTime: number = Date.now()
         const url: string = req.baseUrl
-        console.log(`[${req.method}] ${moment(startTime).format()} --> ${chalk.bold(url)}`)
+        logger.log(`[${req.method}] --> ${url}`, 'logger.middleware', false)
 
         try {
             await next()
         } catch (error) {
-            console.log(`[${req.method}] ${moment().format()} <-- ${chalk.red(String(res.statusCode))} ${chalk.bold(url)} error: ${error}`)
+            logger.error(`[${req.method}] <-- ${res.statusCode} ${url}`, error, 'logger.middleware')
             throw error
         }
 
@@ -29,7 +28,7 @@ export class LoggerMiddleware implements NestMiddleware<any, any> {
                 const l = Number(res.getHeader('content-length'))
                 length = bytes(l) ? bytes(l).toLowerCase() : ''
             }
-            console.log(`[${req.method}] ${moment(finishTime).format()} <-- ${chalk.green(String(statusCode))} ${chalk.bold(url)} ${chalk.bold((finishTime - startTime) + 'ms')} ${length}`)
+            logger.log(`[${req.method}] <-- ${res.statusCode} ${url} ${(finishTime - startTime) + 'ms'}`, 'logger.middleware', false)
         }
 
         res.once('finish', () => {

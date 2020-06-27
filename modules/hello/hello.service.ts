@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common'
 export class HelloService {
     async sayHello() {
         return {
-            msg: 'hello'
+            msg: new Date()
         }
     }
 }

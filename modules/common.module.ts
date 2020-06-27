@@ -1,10 +1,13 @@
-import { Module, Global } from '@nestjs/common'
-import { MongoService } from './_common/Mongo.service'
+import { Module, Global, HttpModule } from '@nestjs/common'
+import { Cache } from './_common/Cache.service'
+import { Mongo } from './_common/Mongo.service'
+import { MyLogger } from './_common/Logger.service'
 
 
 @Global()
 @Module({
-    providers: [ MongoService ],
-    exports: [ MongoService ]
+    imports: [ HttpModule ],
+    providers: [ Cache, Mongo, MyLogger ],
+    exports: [ Cache, Mongo, MyLogger ]
 })
 export class CommonModule {}

@@ -3,33 +3,35 @@ import {
     Catch,
     ExceptionFilter,
     HttpException,
-    HttpStatus,
-    Logger,
+    InternalServerErrorException
 } from '@nestjs/common'
+import { logger } from '../../modules/_common/Logger.service'
 
-@Catch(HttpException)
+@Catch()
 export class ErrorFilter implements ExceptionFilter {
-    catch(exception: HttpException, host: ArgumentsHost) {
+    catch(exception: any, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
 
-        const message = exception.message.message;
-        Logger.log('ERROR: ', message);
-        const errorResponse = {
-            data: {
-                error: message,
-            },
-            message: 'fail',
-            code: 1,
-            url: request.originalUrl,
-        };
-        const status =
-            exception instanceof HttpException
-                ? exception.getStatus()
-                : HttpStatus.INTERNAL_SERVER_ERROR;
-        response.status(status);
-        response.header('Content-Type', 'application/json; charset=utf-8');
-        response.send(errorResponse);
+        if (exception instanceof HttpException || exception instanceof InternalServerErrorException) {
+            const message = exception.message
+            const code = exception.getStatus()
+            const errorResponse = {
+                msg: code === 403 ? '暂无权限访问' : '请求失败',
+                message,
+                code,
+                url: request.originalUrl,
+            };
+            response.status(200);
+            response.header('Content-Type', 'application/json; charset=utf-8');
+            response.send(errorResponse);
+        }
+
+        if (exception && typeof(exception) === 'object') {
+            logger.error(exception.message ? JSON.stringify(exception.message) : JSON.stringify(exception), '')
+        } else {
+            logger.error(String(exception), '')
+        }
     }
 }

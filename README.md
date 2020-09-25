@@ -1,3 +1,7 @@
+<a href="https://github.com/mykurisu/fast-nest">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=mykurisu&repo=fast-nest" />
+</a>
+
 #   Fast-Nest
 
 帮助你快速初始化基于Nest.js的node后端服务

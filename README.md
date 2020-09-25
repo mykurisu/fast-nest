@@ -1,7 +1,3 @@
-<a href="https://github.com/mykurisu/fast-nest">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=mykurisu&repo=fast-nest" />
-</a>
-
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=mykurisu)](https://github.com/mykurisu/fast-nest)
 
 #   Fast-Nest

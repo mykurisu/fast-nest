@@ -33,10 +33,9 @@ const winstonLogger = winston.createLogger({
     transports,
     format: winston.format.combine(
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
-        winston.format.printf(({ timestamp, level, message, context = 'unknown' }) => {
+        winston.format.printf(({ timestamp, level, message }) => {
             level = _.toUpper(level);
-            const meta: any = { 'ws-request-id': '-', 'ws-loginid': '-' };
-            return `${timestamp}\t${level}\t[${process.pid}]\t[${meta['ws-client-ip'] || '-'}]\t[${context}]\t[${meta['ws-request-id']},${meta['ws-loginid']},]\t[-]\t${message}`;
+            return `${timestamp}\t${level}\t[${process.pid}]\t[-]\t${message}`;
         }),
     ),
 })

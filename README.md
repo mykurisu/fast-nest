@@ -1,5 +1,3 @@
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=mykurisu)](https://github.com/mykurisu/fast-nest)
-
 #   Fast-Nest
 
 帮助你快速初始化基于Nest.js的node后端服务

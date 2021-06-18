@@ -16,7 +16,6 @@ async function bootstrap() {
     app.use(cookieParser());
 
     {{#if cors}}
-
     //  是否开启跨域配置
     app.enableCors()
     {{/if}}
@@ -33,7 +32,6 @@ async function bootstrap() {
     app.useGlobalInterceptors(new StandardRespInterceptor())
 
     {{#if gzip}}
-
     //  是否开启压缩配置
     app.use(compression())
     {{/if}}

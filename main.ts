@@ -1,8 +1,8 @@
 import { join } from 'path'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import cookieParser from 'cookie-parser'
-import compression from 'compression'
+import cookieParser from 'cookie-parser'{{#if gzip}}
+import compression from 'compression'{{/if}}
 
 
 import App from './app.module'
@@ -15,8 +15,11 @@ async function bootstrap() {
 
     app.use(cookieParser());
 
+    {{#if cors}}
+
     //  是否开启跨域配置
-    app.enableCors();
+    app.enableCors()
+    {{/if}}
 
     //  静态资源配置
     app.useStaticAssets(join(__dirname, 'uploads'), {
@@ -29,10 +32,13 @@ async function bootstrap() {
     //  处理全局数据返回
     app.useGlobalInterceptors(new StandardRespInterceptor())
 
-    //  开启Gzip压缩请求
+    {{#if gzip}}
+
+    //  是否开启压缩配置
     app.use(compression())
+    {{/if}}
 
     await app.listen(Config.serverConfig.port);
 }
 
-bootstrap()
+bootstrap();

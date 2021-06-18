@@ -1,6 +1,0 @@
-import { Controller } from '@nestjs/common'
-import { {{_moduleName}}Service } from './{{_fileName}}.service'
-
-
-@Controller('/{{_fileName}}')
-export class {{_moduleName}}Controller {}

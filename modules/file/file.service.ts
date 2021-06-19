@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import md5 from 'blueimp-md5'
 import { Injectable, OnModuleInit, HttpException, HttpStatus } from '@nestjs/common'
-import { MyLogger } from '../_common/Logger.service'
+import { MyLogger } from '@mykurisu/fast-nest-logger'
 import { ROOT_PATH, STATIC_PATH } from '../../common/constants/index'
 
 

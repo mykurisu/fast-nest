@@ -18,6 +18,7 @@
   "author": "{{author}}",
   "license": "ISC",
   "dependencies": {
+    "@mykurisu/fast-nest-logger": "{{loggerVerion}}",
     "@nestjs/common": "^7.2.0",
     "@nestjs/core": "^7.2.0",
     "@nestjs/platform-express": "^6.10.1",

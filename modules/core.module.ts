@@ -1,5 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
-import { LoggerMiddleware } from '../common/middleware/logger.middleware'
+import { LoggerMiddleware } from '@mykurisu/fast-nest-logger'
 
 
 @Module({})

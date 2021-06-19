@@ -4,11 +4,15 @@ import {
     ExceptionFilter,
     HttpException,
     InternalServerErrorException
-} from '@nestjs/common'
-import { logger } from '../../modules/_common/Logger.service'
+} from '@nestjs/common';
+import { MyLogger } from '@mykurisu/fast-nest-logger';
+import Config from '../../config';
+
 
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
+    private myLogger: MyLogger = new MyLogger(Config.logOptions || {})
+
     catch(exception: any, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
@@ -29,9 +33,9 @@ export class ErrorFilter implements ExceptionFilter {
         }
 
         if (exception && typeof(exception) === 'object') {
-            logger.error(exception.message ? JSON.stringify(exception.message) : JSON.stringify(exception), '')
+            this.myLogger.error(exception.message ? JSON.stringify(exception.message) : JSON.stringify(exception), '')
         } else {
-            logger.error(String(exception), '')
+            this.myLogger.error(String(exception), '')
         }
     }
 }

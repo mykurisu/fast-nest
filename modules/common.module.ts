@@ -1,5 +1,5 @@
-import { Module, Global, HttpModule } from '@nestjs/common'
-import { MyLogger } from './_common/Logger.service'
+import { Module, Global, HttpModule } from '@nestjs/common';
+import { MyLogger } from '@mykurisu/fast-nest-logger';
 
 
 @Global()
